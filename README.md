@@ -1,3 +1,16 @@
+---
+title: TRUTHGUARD — Multi-Modal Deepfake Detection System
+emoji: 🛡️
+colorFrom: indigo
+colorTo: red
+sdk: gradio
+sdk_version: 4.31.5
+app_file: app.py
+pinned: false
+license: mit
+short_description: TRUTHGUARD is a unified multi-modal deepfake detection framework analyzing images, video, and audio for AI manipulation.
+---
+
 # 🛡️ TRUTHGUARD — Unified Multi-Modal Deepfake Detection System
 
 TRUTHGUARD is a multi-modal AI deepfake detection framework that independently analyzes **images**, **video**, and **audio** for synthetic manipulation, orchestrating decisions through a **Cross-Modal Fusion Layer**.
