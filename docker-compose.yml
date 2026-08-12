@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  truthguard:
+    build: .
+    container_name: truthguard_app
+    ports:
+      - "7860:7860"
+      - "8000:8000"
+    environment:
+      - TRUTHGUARD_API_URL=http://127.0.0.1:8000
+    restart: unless-stopped
