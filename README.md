@@ -8,7 +8,7 @@ sdk_version: 4.31.5
 app_file: app.py
 pinned: false
 license: mit
-short_description: TRUTHGUARD is a unified multi-modal deepfake detection framework analyzing images, video, and audio for AI manipulation.
+short_description: Multi-modal deepfake detection for images, video & audio.
 ---
 
 # 🛡️ TRUTHGUARD — Unified Multi-Modal Deepfake Detection System
