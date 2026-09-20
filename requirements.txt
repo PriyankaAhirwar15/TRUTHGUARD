@@ -3,10 +3,10 @@
 # CPU-only build (suitable for HuggingFace Spaces free tier)
 # ─────────────────────────────────────────────
 
-# Deep-learning core (CPU wheel)
-torch==2.2.2
-torchvision==0.17.2
-torchaudio==2.2.2
+# Deep-learning core (compatible with HF ZeroGPU runtime)
+torch>=2.2.0
+torchvision
+torchaudio
 
 # Model architectures
 timm==1.0.3                    # EfficientNet-B4 via timm
