@@ -6,8 +6,18 @@ Hugging Face Spaces Entry Point for TRUTHGUARD.
 Hugging Face Spaces expects `app.py` in the root directory.
 This script launches both the FastAPI backend (in a background thread)
 and the Gradio dashboard interface on port 7860.
+
+IMPORTANT: `spaces` MUST be imported before any CUDA-related package
+(torch, torchvision, etc.). Do NOT reorder these imports.
 """
 
+# ── MUST be first, before torch/torchvision/torchaudio ──────────────────────
+try:
+    import spaces  # noqa: F401  — registers ZeroGPU hooks before CUDA init
+except ImportError:
+    pass  # running locally without the spaces package — no-op
+
+# ── Standard library ─────────────────────────────────────────────────────────
 import sys
 import os
 import time
@@ -17,12 +27,15 @@ import uvicorn
 # Add project root to sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# ── Project imports (torch/CUDA loaded here — AFTER spaces) ──────────────────
 from api.main import app as fastapi_app
 from ui.app import demo
+
 
 def start_backend():
     print("[TRUTHGUARD] Starting FastAPI backend on port 8000...")
     uvicorn.run(fastapi_app, host="127.0.0.1", port=8000, log_level="warning")
+
 
 if __name__ == "__main__":
     # Start FastAPI server in background thread
