@@ -42,6 +42,23 @@ import gradio as gr
 from PIL import Image
 import numpy as np
 
+# ZeroGPU support — required on Hugging Face Spaces with ZeroGPU hardware
+try:
+    import spaces
+    HAS_SPACES = True
+except ImportError:
+    # Running locally — create a no-op decorator so the code works unchanged
+    class _NoopSpaces:
+        @staticmethod
+        def GPU(fn=None, duration=60):
+            if fn is not None:
+                return fn
+            def decorator(f):
+                return f
+            return decorator
+    spaces = _NoopSpaces()
+    HAS_SPACES = False
+
 # ---------------------------------------------------------------------------
 # Backend URL
 # ---------------------------------------------------------------------------
@@ -98,6 +115,7 @@ def _call_api(endpoint: str, file_path: str, mime_type: str) -> dict:
 # ---------------------------------------------------------------------------
 
 
+@spaces.GPU(duration=60)
 def analyse_image(image_path: str) -> tuple:
     """
     Send the uploaded image to /detect/image and return:
@@ -127,6 +145,7 @@ def analyse_image(image_path: str) -> tuple:
 # ---------------------------------------------------------------------------
 
 
+@spaces.GPU(duration=120)
 def analyse_video(video_path: str) -> tuple:
     """
     Send the uploaded video to /detect/video and return:
@@ -159,6 +178,7 @@ def analyse_video(video_path: str) -> tuple:
 # ---------------------------------------------------------------------------
 
 
+@spaces.GPU(duration=60)
 def analyse_audio(audio_path: str) -> tuple:
     """
     Send the uploaded audio to /detect/audio and return:
@@ -190,6 +210,7 @@ def analyse_audio(audio_path: str) -> tuple:
 # ---------------------------------------------------------------------------
 
 
+@spaces.GPU(duration=180)
 def analyse_combined(video_path: str) -> tuple:
     """
     Send the uploaded video to /detect/combined and return:

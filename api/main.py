@@ -69,9 +69,12 @@ from models.image.predictor import ImagePredictor
 from models.video.predictor import VideoPredictor
 from models.audio.predictor import AudioPredictor
 
-image_predictor = ImagePredictor(weights_path=None, pretrained=False, device="cpu")
-video_predictor = VideoPredictor(weights_path=None, pretrained=False, device="cpu")
-audio_predictor = AudioPredictor(weights_path=None, device="cpu")
+import torch as _torch
+_DEVICE = "cuda" if _torch.cuda.is_available() else "cpu"
+
+image_predictor = ImagePredictor(weights_path=None, pretrained=False, device=_DEVICE)
+video_predictor = VideoPredictor(weights_path=None, pretrained=False, device=_DEVICE)
+audio_predictor = AudioPredictor(weights_path=None, device=_DEVICE)
 
 print("[TRUTHGUARD] All modules loaded [OK]")
 

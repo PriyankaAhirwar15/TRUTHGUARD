@@ -32,6 +32,7 @@ python-multipart==0.0.9        # for FastAPI file uploads
 
 # UI
 gradio==4.31.5
+spaces                         # ZeroGPU decorator (@spaces.GPU) for HF Spaces
 
 # HTTP client (Gradio → FastAPI calls)
 httpx==0.27.0
