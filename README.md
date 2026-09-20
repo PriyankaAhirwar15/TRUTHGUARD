@@ -1,5 +1,5 @@
 ---
-title: TRUTHGUARD — Multi-Modal Deepfake Detection System
+title: TruthGuard
 emoji: 🛡️
 colorFrom: indigo
 colorTo: red
